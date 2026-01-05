@@ -57,11 +57,14 @@ The API will be available at `http://localhost:8000`
 
 ## 🚀 Deployment (Free)
 
-### Railway (Recommended)
-1. Create account at [railway.app](https://railway.app)
+### Render (Recommended)
+1. Create account at [render.com](https://render.com)
 2. Connect your GitHub repository
-3. Railway auto-detects Python and deploys
-4. Get free URL: `https://your-project.up.railway.app`
+3. Create a new Web Service
+4. Set build command: `pip install -r requirements.txt`
+5. Set start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+6. Render auto-detects Python and deploys
+7. Get free URL: `https://your-project.onrender.com`
 
 ### Alternative Free Options
 - **Render**: 750 hours/month free
@@ -72,7 +75,7 @@ The API will be available at `http://localhost:8000`
 Update your `football_data_service.dart`:
 
 ```dart
-static const String _statsBombUrl = "https://your-backend.up.railway.app";
+static const String _statsBombUrl = "https://your-backend.onrender.com";
 
 // In getMatchHybrid method, for post-match:
 if (status == "FINISHED") {
