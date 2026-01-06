@@ -1,20 +1,30 @@
-import os
-import pandas as pd
-import statsbombpy as sb
-from supabase import create_client, Client
-from typing import Dict, List
-import logging
 
-# Set up logging
-logging.basicConfig(level=logging.INFO)
+import os
+import logging
+from typing import Dict, List
+from dotenv import load_dotenv
+from supabase import create_client, Client
+
+# Load environment variables
+load_dotenv()
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('update_player_stats.log'),
+        logging.StreamHandler()
+    ]
+)
 logger = logging.getLogger(__name__)
 
 # Supabase setup
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+SUPABASE_URL = os.getenv('SUPABASE_URL')
+SUPABASE_KEY = os.getenv('SUPABASE_KEY')
 
 if not SUPABASE_URL or not SUPABASE_KEY:
-    raise ValueError("SUPABASE_URL and SUPABASE_KEY environment variables must be set")
+    raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set in .env file")
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
